@@ -2,7 +2,6 @@ import React from "react";
 
 const CalcButton = (props) => {
   const { value, onClick = (e) => {}, size = 4 } = props;
-  console.log(props);
 
   return (
     <div className={`col-xs-${size}`}>
