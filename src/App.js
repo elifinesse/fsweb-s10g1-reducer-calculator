@@ -8,6 +8,8 @@ import {
   addOne,
   applyNumber,
   changeOperation,
+  ADD_NUMBER,
+  MEMORY_SUM,
 } from "./actions";
 
 import TotalDisplay from "./components/TotalDisplay";
@@ -16,10 +18,16 @@ import CalcButton from "./components/CalcButton";
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   function eventHandler(number) {
-    dispatch(applyNumber(number));
+    //dispatch(applyNumber(number));
+    dispatch({ type: ADD_NUMBER, payload: number });
   }
   function operationHandler(operation) {
     dispatch(changeOperation(operation));
+  }
+  function handleMemoryAndOperation(operator) {
+    dispatch(changeOperation(operator));
+    dispatch({ type: MEMORY_ADD });
+    dispatch({ type: CLEAR_DISPLAY });
   }
 
   console.log(state);
@@ -76,15 +84,28 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={"+"} onClick={() => operationHandler("+")} />
-              <CalcButton value={"*"} onClick={() => operationHandler("*")} />
-              <CalcButton value={"-"} onClick={() => operationHandler("-")} />
+              <CalcButton
+                value={"+"}
+                onClick={() => handleMemoryAndOperation("+")}
+              />
+              <CalcButton
+                value={"*"}
+                onClick={() => handleMemoryAndOperation("*")}
+              />
+              <CalcButton
+                value={"-"}
+                onClick={() => handleMemoryAndOperation("-")}
+              />
             </div>
 
             <div className="row ce_button">
               <CalcButton
                 value={"CE"}
                 onClick={() => dispatch({ type: CLEAR_DISPLAY })}
+              />
+              <CalcButton
+                value={"="}
+                onClick={() => dispatch({ type: MEMORY_SUM })}
               />
             </div>
           </form>

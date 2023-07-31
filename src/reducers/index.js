@@ -1,4 +1,5 @@
 import {
+  ADD_NUMBER,
   ADD_ONE,
   APPLY_NUMBER,
   CHANGE_OPERATION,
@@ -6,6 +7,7 @@ import {
   MEMORY_ADD,
   MEMORY_CLEAR,
   MEMORY_RECALL,
+  MEMORY_SUM,
 } from "./../actions";
 
 export const initialState = {
@@ -66,6 +68,18 @@ const reducer = (state, action) => {
         ...state,
         total: state.memory,
       };
+    case ADD_NUMBER:
+      return {
+        ...state,
+        total:
+          (state.total === 0 ? "" : state.total.toString()) + action.payload,
+      };
+    case MEMORY_SUM: {
+      return {
+        ...state,
+        total: Number(state.total) + Number(state.memory),
+      };
+    }
     default:
       return state;
   }
