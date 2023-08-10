@@ -25,8 +25,8 @@ function App() {
     dispatch(changeOperation(operation));
   }
   function handleMemoryAndOperation(operator) {
-    dispatch(changeOperation(operator));
     dispatch({ type: MEMORY_ADD });
+    dispatch(changeOperation(operator));
     dispatch({ type: CLEAR_DISPLAY });
   }
 
